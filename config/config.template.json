@@ -1,0 +1,11 @@
+{
+  "log": { "level": "info" },
+  "inbounds": [],
+  "outbounds": [
+    {
+      "type": "vless",
+      "server": "__NODE_URL__",
+      "uuid": "__UUID__"
+    }
+  ]
+}
