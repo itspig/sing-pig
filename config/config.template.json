@@ -10,7 +10,7 @@
 			"tag": "🔎LocalDNS"
 		},
 		{
-			"type": "quic",
+			"type": "tls",
 			"tag": "🔎NextDNS",
 			"server": "FR-1fffaa.dns.nextdns.io",
 			"domain_resolver": {
