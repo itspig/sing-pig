@@ -6,31 +6,29 @@ CONFIG="/app/config.json"
 
 # 如果用户运行时挂载了完整 config.json，就直接用
 if [ -f "$CONFIG" ]; then
+  echo "INFO: Found /app/config.json (mounted). Using it directly."
   exec sing-box run -c "$CONFIG"
 fi
 
-# 否则必须有模板
 if [ ! -f "$TEMPLATE" ]; then
-  echo "ERROR: $CONFIG not found and $TEMPLATE not found."
+  echo "ERROR: /app/config.json not found and /app/config.template.json not found."
   exit 1
 fi
 
-# password 来源优先级：
-# 1) 环境变量 PASSWORD（你传参生成/注入）
-# 2) 未提供则自动生成一个随机 password（避免起不来）
+# 如果未提供 PASSWORD，则生成一个随机密码，并打印出来
 if [ "${PASSWORD:-}" = "" ]; then
-  # 生成 24 字符随机串（不依赖 openssl）
-  PASSWORD="$(head -c 64 /dev/urandom | tr -dc 'A-Za-z0-9' | head -c 24 || true)"
+  PASSWORD="$(head -c 96 /dev/urandom | tr -dc 'A-Za-z0-9' | head -c 24 || true)"
   if [ "${PASSWORD:-}" = "" ]; then
     echo "ERROR: failed to generate PASSWORD; please set env PASSWORD."
     exit 1
   fi
-  echo "INFO: PASSWORD not provided; generated one (not printed)."
+  echo "INFO: Generated random PASSWORD: ${PASSWORD}"
+else
+  echo "INFO: Using PASSWORD from env (not generated)."
 fi
 
-# 用 sed 把模板中的 "password": "*" 替换成你的 PASSWORD
-# 注意：如果你的模板里有多个 password="*"，会全部替换（符合大多数需求）
-# 为避免特殊字符破坏 JSON，这里建议 PASSWORD 仅用 [A-Za-z0-9]（上面自动生成也是这个集合）
+# 渲染模板：把 "password": "*" 替换成生成/注入的 PASSWORD
+# 建议 PASSWORD 仅使用字母数字（本脚本生成也是如此），避免 JSON 转义问题
 sed "s/\"password\"[[:space:]]*:[[:space:]]*\"\\*\"/\"password\": \"${PASSWORD}\"/g" \
   "$TEMPLATE" > "$CONFIG"
 
