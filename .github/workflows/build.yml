@@ -49,4 +49,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            SING_BOX_REF=v1.10.0
+            SING_BOX_REF=v1.12.14
