@@ -15,7 +15,7 @@
 			"server": "Scaleway-1fffaa.dns.nextdns.io",
 			"domain_resolver": {
 				"server": "🔎LocalDNS",
-				"strategy": "prefer_ipv4"
+				"strategy": "ipv4_only"
 			}
 		}],
 		"final": "🔎NextDNS"
@@ -42,7 +42,7 @@
 	"route": {
 		"default_domain_resolver": {
 			"server": "🔎NextDNS",
-			"strategy": "prefer_ipv4"
+			"strategy": "ipv4_only"
 		},
 		"rules": [{
 			"ip_is_private": true,
