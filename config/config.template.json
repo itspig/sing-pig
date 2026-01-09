@@ -12,7 +12,7 @@
 		{
 			"type": "tls",
 			"tag": "🔎NextDNS",
-			"server": "FR-1fffaa.dns.nextdns.io",
+			"server": "Scaleway-1fffaa.dns.nextdns.io",
 			"domain_resolver": {
 				"server": "🔎LocalDNS",
 				"strategy": "prefer_ipv4"
