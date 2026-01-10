@@ -28,7 +28,12 @@
 		"users": [{
 			"name": "pig",
 			"password": "*"
-		}]
+		}],
+		"transport": {
+			"type": "ws",
+			"path": "/api/v3/download.getFile",
+			"early_data_header_name": "Sec-WebSocket-Protocol"
+		}
 	}],
 	"outbounds": [{
 		"type": "direct",
