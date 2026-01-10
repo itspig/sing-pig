@@ -22,18 +22,13 @@
 	},
 	"inbounds": [{
 		"type": "trojan",
-		"tag": "WebSocket",
+		"tag": "Horse",
 		"listen": "::",
 		"listen_port": 8181,
 		"users": [{
 			"name": "pig",
 			"password": "*"
-		}],
-		"transport": {
-			"type": "ws",
-			"path": "/api/v3/download.getFile",
-			"early_data_header_name": "Sec-WebSocket-Protocol"
-		}
+		}]
 	}],
 	"outbounds": [{
 		"type": "direct",
