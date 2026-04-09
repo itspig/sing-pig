@@ -11,14 +11,14 @@
 		},
 		{
 			"type": "tls",
-			"tag": "🔎NextDNS",
-			"server": "Scaleway-1fffaa.dns.nextdns.io",
+			"tag": "🔎Google",
+			"server": "dns.google",
 			"domain_resolver": {
 				"server": "🔎LocalDNS",
 				"strategy": "ipv4_only"
 			}
 		}],
-		"final": "🔎NextDNS"
+		"final": "🔎Google"
 	},
 	"inbounds": [{
 		"type": "trojan",
@@ -41,7 +41,7 @@
 	}],
 	"route": {
 		"default_domain_resolver": {
-			"server": "🔎NextDNS",
+			"server": "🔎Google",
 			"strategy": "ipv4_only"
 		},
 		"rules": [{
