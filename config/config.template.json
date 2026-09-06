@@ -4,6 +4,19 @@
 		"level": "info",
 		"timestamp": true
 	},
+	"ntp": {
+		"enabled": true,
+		"server": "time.cloudflare.com",
+		"interval": "1d"
+	},
+	"certificate": {
+		"store": "chrome"
+	},
+	"http_clients": [{
+		"tag": "🕷️Http_client",
+		"engine": "go",
+		"version": 2
+	}],
 	"dns": {
 		"servers": [{
 			"type": "local",
@@ -17,8 +30,17 @@
 				"server": "🔎LocalDNS",
 				"strategy": "ipv4_only"
 			}
-		}],
-		"final": "🔎Google"
+		},
+		{
+			"type": "https",
+			"tag": "🔎NextDNS",
+			"server": "dns.nextdns.io",
+			"path": "/1fffaa/FR",
+			"domain_resolver": {
+				"server": "🔎LocalDNS",
+				"strategy": "ipv4_only"
+			}
+		}]
 	},
 	"inbounds": [{
 		"type": "trojan",
@@ -41,9 +63,10 @@
 	}],
 	"route": {
 		"default_domain_resolver": {
-			"server": "🔎Google",
+			"server": "🔎NextDNS",
 			"strategy": "ipv4_only"
 		},
+		"default_http_client": "🕷️Http_client",
 		"rules": [{
 			"ip_is_private": true,
 			"action": "reject"
