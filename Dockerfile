@@ -4,7 +4,7 @@ FROM golang:1.27.1-alpine AS builder
 RUN apk add --no-cache git build-base
 WORKDIR /src
 
-ARG SING_BOX_REF=v1.14.0
+ARG SING_BOX_REF=v1.14.2
 RUN git clone https://github.com/SagerNet/sing-box.git .
 RUN git checkout ${SING_BOX_REF}
 

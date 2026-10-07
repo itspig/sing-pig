@@ -27,8 +27,7 @@
 			"tag": "🔎Google",
 			"server": "dns.google",
 			"domain_resolver": {
-				"server": "🔎LocalDNS",
-				"strategy": "ipv4_only"
+				"server": "🔎LocalDNS"
 			}
 		},
 		{
@@ -37,11 +36,24 @@
 			"server": "dns.nextdns.io",
 			"path": "/1fffaa/FR",
 			"domain_resolver": {
-				"server": "🔎LocalDNS",
-				"strategy": "ipv4_only"
+				"server": "🔎LocalDNS"
 			}
 		}]
 	},
+	"endpoints": [{
+		"type": "wireguard",
+		"tag": "☁️Warp",
+		"mtu": 1300,
+		"address": ["172.16.0.2/32", "2606:4700:110:8246:5143:3ac8:9f9f:3075/128"],
+		"private_key": "kB+pxeQfti9E8TdcCq0bcPrHEEl2YXtobx8Lf9xXx0Q=",
+		"peers": [{
+			"address": "2606:4700:d0::a29f:c007",
+			"port": 1701,
+			"reserved": [58, 238, 5],
+			"public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+			"allowed_ips": ["0.0.0.0/0"]
+		}]
+	}],
 	"inbounds": [{
 		"type": "trojan",
 		"tag": "Horse",
@@ -64,13 +76,24 @@
 	"route": {
 		"default_domain_resolver": {
 			"server": "🔎NextDNS",
-			"strategy": "ipv4_only"
+			"strategy": "prefer_ipv4"
 		},
 		"default_http_client": "🕷️Http_client",
 		"rules": [{
 			"ip_is_private": true,
 			"action": "reject"
-		}],
-		"final": "✈️Direct"
+		},
+		{
+			"action": "resolve",
+			"server": "🔎NextDNS",
+			"client_subnet": "51.15.0.0/16"
+		},
+		{
+			"ip_cidr": ["::/0"],
+			"outbound": "☁️Warp"
+		},
+		{
+			"outbound": "✈️Direct"
+		}]
 	}
 }
