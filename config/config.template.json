@@ -34,7 +34,7 @@
 			"type": "https",
 			"tag": "🔎NextDNS",
 			"server": "dns.nextdns.io",
-			"path": "/1fffaa/FR",
+			"path": "/1fffaa/Scaleway",
 			"domain_resolver": {
 				"server": "🔎LocalDNS"
 			}
